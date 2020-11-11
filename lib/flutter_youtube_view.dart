@@ -8,8 +8,7 @@ export 'src/you_tube_player_listener.dart';
 export 'src/youtube_param.dart';
 export 'src/flutter_youtube_view_controller.dart';
 
-typedef void FlutterYoutubeViewCreatedCallback(
-    FlutterYoutubeViewController controller);
+typedef void FlutterYoutubeViewCreatedCallback(FlutterYoutubeViewController controller);
 
 enum YoutubeScaleMode { none, fitWidth, fitHeight }
 
@@ -54,35 +53,30 @@ class _FlutterYoutubeViewState extends State<FlutterYoutubeView> {
   }
 
   Widget _buildVideo() {
+    final creationParam = <String, dynamic>{
+      "scale_mode": widget.scaleMode.index,
+      "videoId": widget.params.videoId,
+      "showUI": widget.params.showUI,
+      "startSeconds": widget.params.startSeconds,
+      "autoPlay": widget.params.autoPlay,
+      "showYoutube": widget.params.showYoutube,
+      "showFullScreen": widget.params.showFullScreen,
+    };
     if (defaultTargetPlatform == TargetPlatform.android) {
       return AndroidView(
         viewType: 'plugins.hoanglm.com/youtube',
         onPlatformViewCreated: _onPlatformViewCreated,
-        creationParams: <String, dynamic>{
-          "scale_mode": widget.scaleMode.index,
-          "videoId": widget.params.videoId,
-          "showUI": widget.params.showUI,
-          "startSeconds": widget.params.startSeconds,
-          "autoPlay": widget.params.autoPlay,
-          "showYoutube": widget.params.showYoutube,
-          "showFullScreen": widget.params.showFullScreen,
-        },
+        creationParams: creationParam,
         creationParamsCodec: StandardMessageCodec(),
       );
     } else if (defaultTargetPlatform == TargetPlatform.iOS) {
       return UiKitView(
         viewType: 'plugins.hoanglm.com/youtube',
         onPlatformViewCreated: _onPlatformViewCreated,
-        creationParams: <String, dynamic>{
-          "videoId": widget.params.videoId,
-          "showUI": widget.params.showUI,
-          "startSeconds": widget.params.startSeconds,
-          "autoPlay": widget.params.autoPlay,
-        },
+        creationParams: creationParam,
         creationParamsCodec: StandardMessageCodec(),
       );
     }
-    return Text(
-        '$defaultTargetPlatform is not yet supported by the text_view plugin');
+    return Text('$defaultTargetPlatform is not yet supported by the text_view plugin');
   }
 }
