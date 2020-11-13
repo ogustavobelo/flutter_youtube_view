@@ -80,6 +80,18 @@ class FlutterYoutubeView: NSObject, FlutterPlatformView {
                 self.player.pauseVideo()
             }
             result(nil)
+        case "clear":
+            print("clear is called")
+            if (self.isPlayerReady) {
+                self.player.clearVideo()
+            }
+            result(nil)
+        case "stop":
+            print("stop is called")
+            if (self.isPlayerReady) {
+                self.player.stopVideo()
+            }
+            result(nil)
         case "seekTo":
             print("seekTo is called")
             if (self.isPlayerReady) {
