@@ -52,8 +52,8 @@ class FlutterYoutubeView: NSObject, FlutterPlatformView {
     }
     
     private func dispose() {
-        self.player.stopVideo()
-        self.player.clearVideo()
+        self.player.pauseVideo()
+        // self.player.clearVideo()
     }
     
     func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
