@@ -38,6 +38,14 @@ class FlutterYoutubeViewController {
     await _channel.invokeMethod('pause', null);
   }
 
+  Future<void> clear() async {
+    await _channel.invokeMethod('clear', null);
+  }
+
+  Future<void> stop() async {
+    await _channel.invokeMethod('stop', null);
+  }
+
   Future<void> seekTo(double time) async {
     await _channel.invokeMethod('seekTo', time);
   }
